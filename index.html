@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .video--card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="video--card">
+        <canvas id='can1' height="480px" width="720px"></canvas>
+    </div>
+
+    <script>
+        ( () => {
+            const vid = document.createElement( 'video' );
+            const ctx = document.getElementById( 'can1' )
+                .getContext( '2d' );
+
+            ctx.filter = 'sepia(100%)';
+            vid.muted = true;
+            vid.src = "http://grochtdreis.de/fuer-jsfiddle/video/sintel_trailer-480.mp4";
+            vid.loop = true;
+            vid.play().then( anim );
+
+            function anim() {
+                requestAnimationFrame( anim );
+                ctx.drawImage( vid, 0, 0, 720, 480 )
+            }
+        } )();
+    </script>
+</body>
+
+</html>
